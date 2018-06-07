@@ -1,4 +1,6 @@
 <html>
+        <meta name="google-signin-scope" content="kaushik5699@gmail.com">
+        <meta name="google-signin-client_id" content="276011202741-j5t97s9memnnmm71du2pfp0fsqt59tsg.apps.googleusercontent.com">
     <head>
         <title>
             SignIn
@@ -6,7 +8,24 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
     </head>
-<body background= "C:\Users\Kaushik\Desktop\Websites\back.jpg">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<body background= "C:\Apache24\htdocs\Website\back.jpg">
+         <script>
+          function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+    
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+          };
+        </script>
     <div id="head">
         <h1 class="head">
             <center>
@@ -17,17 +36,19 @@
 <div id="login-box">
     <div class="left-box">
         <h1>Sign Up</h1>
+        <form class="signup-form" action="includes/signup.inc.php" method="POST"></form>
         <input type="text" name="username" placeholder="Username"/>
         <input type="text" name="email" placeholder="Email"/>
         <input type="password" name="password" placeholder="Password"/>
         <input type="password" name="password2" placeholder="Retype Password"/>
         <input type="submit" name="signup-button" value="Sign Up"/>
+</form>
     </div>
     <div class="right-box">
         <span class="signinwith">Sign In with social network</span>
         <button class="social facebook"> <a href="#" class="fa fa-facebook"></a>  Log in with Facebook</button>
         <button class="social twitter"><a href="#" class="fa fa-twitter"></a>  Log in with twitter</button>
-        <button class="social google"><a href="#" class="fa fa-google"></a>  Log in with google</button>
+        <button class="social google" onclick="signIn()"><a href="#" class="fa fa-google"></a>  Log in with google</button>
     </div>
     <div class="or">
             OR
